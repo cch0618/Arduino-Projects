@@ -1,15 +1,13 @@
 #include <LiquidCrystal_I2C.h>
-LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 //DHT11 온습도센서 세팅
 #include "DHT.h"                // DHT11 라이브러리 포함
 #define DHTPIN 7                // DHT11 연결핀
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
-#define LCD_Backlight 8 // 15. BL1 - Backlight +                                Emitter of 2N3904, Collector to VCC, Base to D10 via 10K resistor
-                         // 16. BL2 - Backlight -                                GND
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-//먼지센서 세팅
+
 int LED = 11;
 int DUST = 0;
 int samplingTime = 280;
@@ -79,11 +77,11 @@ void loop() {
     analogWrite(9, 0);
     analogWrite(10, 20);
   }
-  if (a > 35 & a < 75) {    // 나쁨
+  else if (a > 35 & a < 75) {    // 나쁨
     analogWrite(9, 30);
     analogWrite(10, 3);
   }
-  if (a > 75) {                // 매우나쁨
+  else if (a > 75) {                // 매우나쁨
     analogWrite(9, 20);
     analogWrite(10, 0);
   }
